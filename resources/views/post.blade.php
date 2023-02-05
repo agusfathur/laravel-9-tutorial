@@ -8,6 +8,9 @@
         {{-- {{ $post->body }} --}}
 
         {{-- cetak sesuai isinya, pastikan aman --}}
+        {{-- relasionship --}}
+        <p>By: Agus Fathur Rozi in <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
+
         {!! $post->body !!}
 
     </article>
@@ -18,7 +21,8 @@
 
 {{-- Post::create([
 'title' => 'Judul ketiga',
-'slug' => 'judul-ketiga',
-'excerpt' => 'Lorem ipsum kedua',
+'category_id' => 3,
+'slug' => 'judul-ke-tiga',
+'excerpt' => 'Lorem ipsum tiga',
 'body'=> '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid reprehenderit pariatur, in quisquam harum, quidemmollitia similique recusandae dicta, repudiandae fugiat excepturi. Ipsum provident inventore alias necessitatibus.Quoex hic tempore at nesciunt, optio obcaecati voluptate, </p><p>voluptatibus architecto similique cum a ipsam ab repudiandae modi molestiae illo exercitationem quidem blanditiis minus eius non dolorem. Incidunt, nisi recusandae voluptatem nostrum facilis, tempore officia laudantium corrupti quibusdam ducimus autem! Dolore, molestiae fugiat quis sunt dignissimos enim! Tenetur dolorum aspernatur libero quaerat porro! </p>'
 ])  --}}
