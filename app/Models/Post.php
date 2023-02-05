@@ -2,41 +2,33 @@
 
 namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Post
+class Post extends Model
 {
-    private static $blog_posts = [
-        [
-            "title" => "Judul post pertama",
-            "slug" => "judul-post-pertama",
-            "author" => "Agus Fathur Rozi",
-            "body" => "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam, deserunt odio dolorum laudantium assumenda dignissimos, molestias, pariatur facilis quam similique voluptatum ab eligendi molestiae illo."
-        ],
-        [
-            "title" => "Judul post kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Sam Agoes",
-            "body" => "
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, asperiores? Placeat porro natus consectetur quia amet nemo incidunt commodi expedita non illo, et nihil laborum tempore! Cupiditate deserunt voluptates blanditiis repellat magni commodi fugiat placeat dicta? Ipsum optio, temporibus minus magni nihil accusamus tempore itaque, tenetur nisi autem esse corrupti laudantium aliquam eum expedita fuga molestias hic at ullam. Aliquid vel ipsa fugiat ipsum repellat libero eveniet maxime asperiores assumenda, animi impedit, delectus ducimus perspiciatis odio recusandae eos. Nesciunt iste dignissimos doloribus culpa ad atque aperiam tenetur unde, tempora iusto quos inventore quo. Doloremque corporis impedit quos, illum magni beatae.
-        "
-        ],
+    use HasFactory;
 
-    ];
+    //      Post::create([
+    // 'title' => 'Judul ke empat',
+    // 'excerpt' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi, hic!',
+    // 'body'=> '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid reprehenderit pariatur, in quisquam harum,
+    //     quidemmollitia similique recusandae dicta, repudiandae fugiat excepturi. Ipsum provident inventore alias
+    //     necessitatibus.Quoex hic tempore at nesciunt, optio obcaecati voluptate, </p>
+    // <p>voluptatibus architecto similique cum a ipsam ab repudiandae modi molestiae illo exercitationem quidem blanditiis
+    //     minus eius non dolorem. Incidunt, nisi recusandae voluptatem nostrum facilis, tempore officia laudantium corrupti
+    //     quibusdam ducimus autem! Dolore, molestiae fugiat quis sunt dignissimos enim! Tenetur dolorum aspernatur libero
+    //     quaerat porro! </p>'
+    // ])
 
-    public static function all()
-    {
-        // $this-> properti biasa
-        // properti static pakai self::
-        // collecction
-        return collect(self::$blog_posts);
-    }
+    // yang dapat diisi
+    // protected $fillable = [
+    //     'title',
+    //     'excerpt',
+    //     'body'
+    // ];
 
-    public static function find($slug)
-    {
-        $posts = static::all();
-        // collecction
-        return $posts->firstWhere('slug', $slug);
-    }
+    // tak boleh disii
+    protected $guarded = ['id'];
+
 }
