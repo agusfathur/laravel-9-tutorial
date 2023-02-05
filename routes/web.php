@@ -32,4 +32,6 @@ Route::get('/about', function () {
 
 
 Route::get('/posts', [PostController::class, 'index']);
+
+//  post:slug, cari post WHERE slug = :slug
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
