@@ -46,18 +46,19 @@ Route::get('/categories', function () {
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('category', [
-        'title' => $category->name,
+    return view('posts', [
+        'title' => "Post By Category : $category->name",
         // panggil method relasi
-        'posts' => $category->posts,
-        'category' => $category->name
+        // lazy eager lpading
+        'posts' => $category->posts->load('category', 'author'),
     ]);
 });
 
 Route::get('/authors/{author:username}', function (User $author) {
     return view('posts', [
-        'title' => 'User Posts',
+        'title' => "Post By Author : $author->name",
         // panggil method relasi
-        'posts' => $author->posts,
+        // lazy eager lpading
+        'posts' => $author->posts->load('category', 'author'),
     ]);
 });
