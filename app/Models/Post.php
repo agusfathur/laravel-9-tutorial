@@ -18,6 +18,7 @@ class Post extends Model
 
     // tak boleh disii
     protected $guarded = ['id'];
+    protected $with = ['category', 'author'];
 
     // relationship ke tabel category
     // nama method harus sama dengan nama model
