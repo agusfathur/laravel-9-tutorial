@@ -7,10 +7,10 @@
         {{-- menggunakan htmlspecialchars, mengamankan isi --}}
         {{-- {{ $post->body }} --}}
 
-        {{-- cetak sesuai isinya, pastikan aman --}}
         {{-- relasionship --}}
         <p>By: Agus Fathur Rozi in <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
 
+        {{-- cetak sesuai isinya, pastikan aman --}}
         {!! $post->body !!}
 
     </article>

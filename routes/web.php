@@ -47,6 +47,7 @@ Route::get('/categories', function () {
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('category', [
         'title' => $category->name,
+        // panggil method relasi
         'posts' => $category->posts,
         'category' => $category->name
     ]);

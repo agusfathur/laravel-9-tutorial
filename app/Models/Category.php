@@ -11,6 +11,7 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
+    // relationship
     public function posts()
     {
         // one to many cardinality
