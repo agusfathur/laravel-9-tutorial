@@ -39,6 +39,7 @@ class Post extends Model
                 }
             );
         });
+
         // arrow function
         $query->when(
             $filters['author'] ?? false,
