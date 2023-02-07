@@ -20,14 +20,14 @@ use App\Http\Controllers\PostController;
 Route::get('/', function () {
     return view('home', [
         "title" => "Home",
-        'active' => 'home',
+        'active' => "home",
     ]);
 });
 
 Route::get('/about', function () {
     return view('about', [
         "title" => "About",
-        'active' => 'about',
+        'active' => "about",
         "name" => "Moh Agus Fathur Rozi",
         "email" => "Agusfathur25@gmai.com",
         "image" => "pp.jpg"
@@ -48,22 +48,22 @@ Route::get('/categories', function () {
     ]);
 });
 
-Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('posts', [
-        'title' => "Post By Category : $category->name",
-        'active' => 'categories',
-        // panggil method relasi
-        // lazy eager lpading
-        'posts' => $category->posts->load('category', 'author'),
-    ]);
-});
+// Route::get('/categories/{category:slug}', function (Category $category) {
+//     return view('posts', [
+//         'title' => "Post By Category : $category->name",
+//         'active' => 'categories',
+//         // panggil method relasi
+//         // lazy eager lpading
+//         'posts' => $category->posts->load('category', 'author'),
+//     ]);
+// });
 
-Route::get('/authors/{author:username}', function (User $author) {
-    return view('posts', [
-        'title' => "Post By Author : $author->name",
-        'active' => '',
-        // panggil method relasi
-        // lazy eager lpading
-        'posts' => $author->posts->load('category', 'author'),
-    ]);
-});
+// Route::get('/authors/{author:username}', function (User $author) {
+//     return view('posts', [
+//         'title' => "Post By Author : $author->name",
+//         'active' => 'posts',
+//         // panggil method relasi
+//         // lazy eager lpading
+//         'posts' => $author->posts->load('category', 'author'),
+//     ]);
+// });
