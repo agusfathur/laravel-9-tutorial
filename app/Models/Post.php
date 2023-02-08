@@ -18,6 +18,8 @@ class Post extends Model
 
     // tak boleh disii
     protected $guarded = ['id'];
+
+    // agar melakukan eager loading
     protected $with = ['category', 'author'];
 
     // search filter
@@ -63,5 +65,16 @@ class Post extends Model
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     * routr mencari slug
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }
