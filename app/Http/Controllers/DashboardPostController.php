@@ -30,6 +30,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
+
         return view('dashboard.posts.create', [
             'categories' => Category::all()
         ]);
@@ -42,15 +43,24 @@ class DashboardPostController extends Controller
      * @return \Illuminate\Http\Response
      * PATCH
      * cari berdasarkan id / slug,
+     * Images, agar image dapat dilihat public sambungkan STORAGE ke folder public
+     * di terminal, php artisan storage:link
      */
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'slug' => 'required|unique:posts',
             'category_id' => 'required',
+            // 1024 KB, 1Mb
+            'image' => 'image|file|max:1024',
             'body' => 'required'
         ]);
+
+        if ($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
 
         $validatedData['user_id'] = auth()->user()->id;
         // limit string, 200 huruf
