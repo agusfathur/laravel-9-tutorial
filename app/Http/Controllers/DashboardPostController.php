@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPostController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * GET
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-
         return view('dashboard.posts.index', [
             "posts" => Post::where('user_id', Auth()->user()->id)->get()
         ]);
@@ -28,7 +29,9 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.posts.create', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -36,10 +39,12 @@ class DashboardPostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * PATCH
+     * cari berdasarkan id / slug,
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -60,6 +65,7 @@ class DashboardPostController extends Controller
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
+     * PACTH
      */
     public function edit(Post $post)
     {
@@ -72,6 +78,7 @@ class DashboardPostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
+     * PUT
      */
     public function update(Request $request, Post $post)
     {
@@ -83,9 +90,17 @@ class DashboardPostController extends Controller
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
+     * DELETE
      */
     public function destroy(Post $post)
     {
         //
+    }
+
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
+        return response()->json(['slug' => $slug]);
     }
 }
