@@ -84,7 +84,7 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->middleware('auth');
 
-// Fecth API sluggable library
+// Fetch API sluggable library
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])
     ->middleware('auth');
 
