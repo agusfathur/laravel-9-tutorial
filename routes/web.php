@@ -73,12 +73,21 @@ Route::get('/categories', function () {
 // });
 
 // name('login') = penanda route login, middleware('auth') = route diakses harus login
-Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::post('/logout', [LoginController::class, 'logout']);
+// Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+// Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
+// Lv 9 , grouping route non resource
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/login', 'index')->name('login')->middleware('guest');
+    Route::post('/login', 'authenticate');
+    Route::post('/logout', 'logout');
+});
+
+
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'index')->middleware('guest');
+    Route::post('/register', 'store');
+});
 
 // jika tida auth maka dilempar ke login
 // middleware harus auth, jika guest, akan dikembalikan ke login

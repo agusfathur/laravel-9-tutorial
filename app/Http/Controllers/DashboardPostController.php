@@ -59,6 +59,8 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ]);
 
+        // jalankan pahp artisan storage:link, /symbolic link
+        // agar gambar bisa diakses public
         // store : pindahkan gambar ke folder storage/...
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');

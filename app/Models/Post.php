@@ -8,7 +8,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    use HasFactory; 
+    use HasFactory;
     use Sluggable;
 
     // yang dapat diisi
@@ -47,9 +47,10 @@ class Post extends Model
         // arrow function
         $query->when(
             $filters['author'] ?? false,
-            fn($query, $author) =>
+            fn ($query, $author) =>
             $query->whereHas(
-                'author', fn($query) =>
+                'author',
+                fn ($query) =>
                 $query->where('username', $author)
             )
         );
@@ -66,6 +67,7 @@ class Post extends Model
 
     public function author()
     {
+        // one to one
         return $this->belongsTo(User::class, 'user_id');
     }
 
