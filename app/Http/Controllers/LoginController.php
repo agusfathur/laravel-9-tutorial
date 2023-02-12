@@ -9,6 +9,7 @@ class LoginController extends Controller
 {
     public function index()
     {
+        // dd(bcrypt(env('PASSWORD_SALT') . '12345' . env('PASSWORD_SALT')));
         return view('login.index', [
             'title' => 'Login',
             'active' => 'login'
@@ -18,11 +19,14 @@ class LoginController extends Controller
 
     public function authenticate(Request $request)
     {
+        // dd($request->password);
         $credentials = $request->validate([
             // 'email' => 'required|email:dns', ketat
             'email' => 'required|email',
             'password' => 'required'
         ]);
+        // done berhasil
+        $credentials['password'] = env('PASSWORD_SALT') . $request->password . env('PASSWORD_SALT');
 
         // authentication
         if (Auth::attempt($credentials)) {

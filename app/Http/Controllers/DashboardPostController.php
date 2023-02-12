@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use GuzzleHttp\Psr7\Response;
 
 class DashboardPostController extends Controller
 {
@@ -26,7 +27,7 @@ class DashboardPostController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * GET 
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -42,7 +43,7 @@ class DashboardPostController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     * PATCH
+     * POSY
      * cari berdasarkan id / slug,
      * Images, agar image dapat dilihat public sambungkan STORAGE ke folder public
      * di terminal, php artisan storage:link
@@ -59,15 +60,17 @@ class DashboardPostController extends Controller
             'body' => 'required'
         ]);
 
-        // jalankan pahp artisan storage:link, /symbolic link
-        // agar gambar bisa diakses public
-        // store : pindahkan gambar ke folder storage/...
+        /**
+         * jalankan pahp artisan storage:link, /symbolic link
+         * agar gambar bisa diakses public
+         * store : pindahkan gambar ke folder storage/...
+         * 
+         */
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-images');
             // access di Front-End
             // {{ asset('storage/' . $post->image) }}
         }
-
         $validatedData['user_id'] = auth()->user()->id;
         // limit string, 200 huruf
         $validatedData['excerpt'] = Str::limit(strip_tags($request->body), 200);
@@ -78,7 +81,7 @@ class DashboardPostController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     * GET
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
@@ -94,7 +97,7 @@ class DashboardPostController extends Controller
      *
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
-     * PACTH
+     * GET
      */
     public function edit(Post $post)
     {
