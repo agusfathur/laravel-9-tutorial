@@ -172,6 +172,7 @@ class DashboardPostController extends Controller
         // delete
         Post::destroy($post->id);
         return redirect('/dashboard/posts')->with('success', 'Post has ben deleted!');
+        // redirect()->away('link external');
     }
 
     // check slug dari fetch js

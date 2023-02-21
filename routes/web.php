@@ -89,16 +89,20 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/register', 'store');
 });
 
-// jika tida auth maka dilempar ke login
-// middleware harus auth, jika guest, akan dikembalikan ke login
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-})->middleware('auth');
 
-// Fetch API sluggable library
-Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])
-    ->middleware('auth');
+// membuat awalan url route
+Route::prefix('/dashboard')->group(function () {
+    // jika tida auth maka dilempar ke login
+    // middleware harus auth, jika guest, akan dikembalikan ke login
+    Route::get('/', function () {
+        return view('dashboard.index');
+    })->middleware('auth');
 
-Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+    // Fetch API sluggable library
+    Route::get('/checkSlug', [DashboardPostController::class, 'checkSlug'])
+        ->middleware('auth');
 
-Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show');
+    Route::resource('/posts', DashboardPostController::class)->middleware('auth');
+
+    Route::resource('/categories', AdminCategoryController::class)->except('show');
+});
